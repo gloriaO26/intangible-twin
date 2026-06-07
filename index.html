@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Intangible Twin™ — AI Readiness Audit</title>
+<title>Intangible Twin™ Lite — AI Readiness Audit</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -148,7 +148,7 @@ textarea{resize:vertical;line-height:1.6}
 <!-- SIDEBAR -->
 <nav id="sidebar">
   <div class="sb-brand">
-    <h1>Intangible Twin™</h1>
+    <h1>Intangible Twin™ Lite</h1>
     <p>Surfacing the intangible dimensions of your organisation's AI transformation journey</p>
   </div>
   <div class="sb-grp">Workspace</div>
@@ -161,12 +161,12 @@ textarea{resize:vertical;line-height:1.6}
   <div class="sb-item" id="nav-report" style="--sc:#475569" onclick="navTo('report')"><span class="sb-icon">↧</span>Report</div>
   <div id="sci-access-link" onclick="accessScience()" style="padding:8px 18px 4px;font-size:10px;color:rgba(255,255,255,.22);cursor:pointer;transition:color .15s;letter-spacing:.02em" onmouseover="this.style.color='rgba(255,255,255,.45)'" onmouseout="this.style.color='rgba(255,255,255,.22)'">Access Science Layer</div>
   <div id="sci-access-err" style="display:none;padding:0 18px 10px;font-size:10px;color:#fca5a5;line-height:1.5"></div>
-  <div class="sb-foot">Intangible Twin™ is a registered trademark.<br>© Dr Gloria Oliomogbe</div>
+  <div class="sb-foot">Intangible Twin™ Lite is a registered trademark.<br>© Dr Gloria Oliomogbe</div>
 </nav>
 
 <!-- TOPBAR -->
 <header id="topbar">
-  <span class="hdr-brand">Intangible Twin<span class="hdr-sup">™</span></span>
+  <span class="hdr-brand">Intangible Twin<span class="hdr-sup">™</span> Lite</span>
   <div class="hdr-div"></div>
   <span class="hdr-lbl">Org</span>
   <input id="hdr-org" type="text" placeholder="Organisation name" oninput="onOrgChange()" autocomplete="off">
@@ -183,7 +183,7 @@ textarea{resize:vertical;line-height:1.6}
   <div id="aud-home">
     <div class="pw">
       <h2>Audit</h2>
-      <p class="sub">The Intangible Twin measures dimensions of organisational and human capabilities to surface insight on AI adoption and tradeoffs.</p>
+      <p class="sub">Intangible Twin™ Lite measures dimensions of organisational and human capabilities to surface insight on AI adoption and tradeoffs.</p>
       <div class="card">
         <label class="fl">Your name</label>
         <p class="fs">Used for audit transparency only — not displayed in the report.</p>
@@ -332,9 +332,9 @@ textarea{resize:vertical;line-height:1.6}
     </div>
     <div id="sci-dims"></div>
     <div class="sci-foot">
-      <p>Intangible Twin™ — © Dr Gloria Oliomogbe · University research framework · All rights reserved<br>
+      <p>Intangible Twin™ Lite — © Dr Gloria Oliomogbe · University research framework · All rights reserved<br>
       Original PhD: <em>Intangible Benefits from Project Management Deployment</em>, University of Leeds, 2017<br>
-      Intangible Twin™ is a registered trademark.</p>
+      Intangible Twin™ Lite is a registered trademark.</p>
     </div>
   </div>
 </div>
@@ -343,7 +343,7 @@ textarea{resize:vertical;line-height:1.6}
 <div id="sec-report" class="sec">
   <div class="pw">
     <h2>Report</h2>
-    <p class="sub">Download your full Intangible Twin™ report including scores, reflection and talking points.</p>
+    <p class="sub">Download your full Intangible Twin™ Lite report including scores, reflection and talking points.</p>
     <div id="rpt-content"></div>
   </div>
 </div>
@@ -646,7 +646,7 @@ function nextDim(){if(audCurDim<DIMS.length-1){audCurDim++;renderDim();}else sho
 function showResults(){
   audShow('aud-results');
   var org=document.getElementById('hdr-org').value||'Your organisation';
-  document.getElementById('res-title').textContent=org+' — Intangible Twin™';
+  document.getElementById('res-title').textContent=org+' — Intangible Twin™ Lite';
   var roleLabel=ROLE_LABELS[audRole]||audRole;
   document.getElementById('res-sub').textContent=roleLabel+' perspective — '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
 
@@ -801,7 +801,7 @@ function downloadReport(e){
       lines.push('');
     });
   }
-  lines.push('═══════════════════════════════════════════════════════','  Intangible Twin™ — © Dr Gloria Oliomogbe','  Intangible Twin™ is a registered trademark.','═══════════════════════════════════════════════════════');
+  lines.push('═══════════════════════════════════════════════════════','  Intangible Twin™ Lite — © Dr Gloria Oliomogbe','  Intangible Twin™ Lite is a registered trademark.','═══════════════════════════════════════════════════════');
   var blob=new Blob([lines.join('\n')],{type:'text/plain'});
   var url=URL.createObjectURL(blob);
   var a=document.createElement('a');
@@ -919,7 +919,7 @@ function renderHistory(){
   var h=getHistory();
   var org=document.getElementById('hdr-org').value||'Organisation';
   document.getElementById('hist-title').textContent=org+' — History';
-  document.getElementById('hist-sub').textContent=h.length+' audit'+(h.length===1?'':'s')+' recorded. Your longitudinal Intangible Twin™ record.';
+  document.getElementById('hist-sub').textContent=h.length+' audit'+(h.length===1?'':'s')+' recorded. Your longitudinal Intangible Twin™ Lite record.';
   histTab('timeline');
 }
 
@@ -1135,7 +1135,7 @@ function accessScience(){
     document.getElementById('sci-access-err').style.display='none';
   }else{
     var err=document.getElementById('sci-access-err');
-    err.textContent='Contact your Intangible Twin Administrator for access';
+    err.textContent='Contact your Intangible Twin™ Lite Administrator for access';
     err.style.display='block';
   }
 }

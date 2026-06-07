@@ -89,9 +89,6 @@ textarea{resize:vertical;line-height:1.6}
 /* Results */
 .sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .sig-card{padding:12px;border-radius:10px;border:1px solid #e2e8f0;background:#fff}
-.mov-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f1f5f9}
-.mov-row:last-child{border-bottom:none}
-.dp{color:#15803d;font-weight:600}.dn2{color:#dc2626;font-weight:600}.dz{color:#94a3b8}
 /* Reflection */
 .emo-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .emo{padding:5px 12px;border-radius:20px;border:1px solid #e2e8f0;background:#fff;font-size:11.5px;cursor:pointer;color:#64748b;transition:all .15s;font-family:inherit}
@@ -196,16 +193,11 @@ textarea{resize:vertical;line-height:1.6}
         <label class="fl">Your role</label>
         <div class="role-grid">
           <button class="ro on" id="role-senior" onclick="setAudRole('senior')" style="--rc:#534AB7;--rb:#ede9fe"><span class="ro-lb">Senior Leader</span><span class="ro-tg">Executive / Director</span></button>
-          <button class="ro" id="role-actor" onclick="setAudRole('actor')" style="--rc:#1D9E75;--rb:#ecfdf5"><span class="ro-lb">Project Actor</span><span class="ro-tg">Manager / PM</span></button>
-          <button class="ro" id="role-team" onclick="setAudRole('team')" style="--rc:#D85A30;--rb:#fff7ed"><span class="ro-lb">Functional Team</span><span class="ro-tg">Team member</span></button>
+          <button class="ro" id="role-actor" onclick="setAudRole('actor')" style="--rc:#1D9E75;--rb:#ecfdf5"><span class="ro-lb">Project Actor</span><span class="ro-tg">PM / Team member / PMO</span></button>
+          <button class="ro" id="role-team" onclick="setAudRole('team')" style="--rc:#D85A30;--rb:#fff7ed"><span class="ro-lb">Functional</span><span class="ro-tg">HR, Finance, Legal and other support functions</span></button>
         </div>
       </div>
-      <div id="aud-hist-sec" style="display:none">
-        <div style="font-size:13px;font-weight:600;color:#1e293b;margin-bottom:8px">Previous audits for this organisation</div>
-        <div id="aud-hist-list"></div>
-        <button class="btn-sec" onclick="navTo('history')" style="margin-top:4px">View full history →</button>
-      </div>
-      <div style="background:#ede9fe;border-radius:9px;padding:12px 14px;border:1px solid #c4b5fd;margin:14px 0 6px">
+<div style="background:#ede9fe;border-radius:9px;padding:12px 14px;border:1px solid #c4b5fd;margin:14px 0 6px">
         <p style="font-size:12px;color:#4c1d95;line-height:1.6"><strong>24 questions · 8 dimensions · ~10 minutes.</strong> Responses saved in your browser. Return anytime — your history will be waiting.</p>
       </div>
       <button class="btn-pri" onclick="startAudit()">Begin audit →</button>
@@ -230,20 +222,11 @@ textarea{resize:vertical;line-height:1.6}
       <div class="tabs">
         <button class="tab on" id="rt1" onclick="resTab('spider')">Profile</button>
         <button class="tab" id="rt2" onclick="resTab('signals')">Signals</button>
-        <button class="tab" id="rt3" onclick="resTab('movement')">Movement</button>
       </div>
       <div id="rtc-spider">
         <div style="display:flex;justify-content:center;margin-bottom:8px"><canvas id="radar" width="320" height="320"></canvas></div>
-        <div id="radar-legend" style="display:none;font-size:11px;color:#64748b;text-align:center;margin-bottom:8px">
-          <span style="display:inline-block;width:12px;height:3px;background:#534AB7;vertical-align:middle;margin-right:4px;border-radius:2px"></span>This audit
-          <span style="display:inline-block;width:12px;height:3px;background:#94a3b8;vertical-align:middle;margin-left:12px;margin-right:4px;border-radius:2px"></span>Previous
-        </div>
       </div>
       <div id="rtc-signals" style="display:none"><div class="sig-grid" id="sig-grid"></div></div>
-      <div id="rtc-movement" style="display:none">
-        <p style="font-size:12px;color:#64748b;margin-bottom:12px;line-height:1.6" id="mov-intro"></p>
-        <div id="mov-list"></div>
-      </div>
       <button class="btn-pri" style="margin-top:16px" onclick="goReflect()">Reflect on what you've seen →</button>
       <button class="btn-sec" onclick="audShow('aud-home')">← Return to start</button>
     </div>
@@ -273,12 +256,6 @@ textarea{resize:vertical;line-height:1.6}
         <p class="fs">Who needs to see this — and what would you say to them?</p>
         <textarea id="r4" rows="3" placeholder="Name the conversation, the person, or the question this surfaces..."></textarea>
       </div>
-      <div id="prev-refl-block" style="display:none;margin-bottom:16px">
-        <label class="fl" style="margin-bottom:6px">Your previous reflection said...</label>
-        <div id="prev-refl-text" style="background:#f8fafb;border-radius:8px;padding:12px;border-left:3px solid #94a3b8;font-size:12px;color:#475569;font-style:italic;line-height:1.6"></div>
-        <p class="fs" style="margin-top:6px">Has anything changed since then?</p>
-        <textarea id="r-change" rows="2" placeholder="Reflect on what's moved — and what hasn't..."></textarea>
-      </div>
       <div class="fg">
         <label class="fl">How does this feel?</label>
         <p class="fs">Select all that apply.</p>
@@ -288,16 +265,6 @@ textarea{resize:vertical;line-height:1.6}
         <label class="fl">One thing you will do differently — and by when?</label>
         <p class="fs">Not a plan. One concrete next step — specific enough to be accountable.</p>
         <textarea id="r5" rows="2" placeholder="Something specific, ideally with a timeframe..."></textarea>
-      </div>
-      <div id="prev-commit-block" style="display:none;margin-bottom:16px">
-        <label class="fl" style="margin-bottom:6px">Last time you committed to...</label>
-        <div id="prev-commit-text" style="background:#f0fdf4;border-radius:8px;padding:12px;border-left:3px solid #16a34a;font-size:12px;color:#14532d;font-style:italic;line-height:1.6"></div>
-        <p class="fs" style="margin-top:6px">Did you do it?</p>
-        <div class="emo-grid" style="margin-top:6px">
-          <button class="emo" id="did-yes" onclick="setDid('yes')">Yes, I did it</button>
-          <button class="emo" id="did-partial" onclick="setDid('partial')">Partially</button>
-          <button class="emo" id="did-no" onclick="setDid('no')">Not yet</button>
-        </div>
       </div>
       <button class="btn-pri" onclick="saveAndComplete()">Save &amp; complete →</button>
       <button class="btn-sec" onclick="audShow('aud-results')">← Back to results</button>
@@ -310,8 +277,7 @@ textarea{resize:vertical;line-height:1.6}
       <p class="sub" id="complete-msg"></p>
       <div class="card" id="saved-summary" style="border-top:3px solid #534AB7"></div>
       <button class="btn-pri" onclick="doDownload()">⬇ Download full report (.txt)</button>
-      <button class="btn-sec" onclick="navTo('history')">View history &amp; timeline →</button>
-      <button class="btn-sec" onclick="audShow('aud-home');checkHistory()">Start new audit</button>
+      <button class="btn-sec" onclick="audShow('aud-home')">Start new audit</button>
     </div>
   </div>
 </div>
@@ -403,7 +369,9 @@ var DIMS=[
    maturity:[{label:'Unaware',color:'#fecaca',text:'#991b1b',desc:'Politics treated as absent or exceptional'},{label:'Acknowledged',color:'#fed7aa',text:'#7c2d12',desc:'Existence of politics named but not addressed'},{label:'Managed',color:'#fef08a',text:'#713f12',desc:'Mechanisms exist to surface and manage political dynamics'},{label:'Embedded',color:'#bbf7d0',text:'#14532d',desc:'Psychological safety to name power explicitly; decisions auditable'}],
    talking:'Who in your organisation would feel safe naming an AI decision driven by personal agenda rather than organisational merit — and what happens to them when they do?',
    talkingColor:'#ef4444',talkingBg:'#fef2f2',
-   signalNote:'A uniformly high score in this dimension (80+/100 with low variance) is a statistical red flag, not a positive result. No organisation with real AI adoption decisions underway is genuinely free of political dynamics. A high-confidence uniform response suggests social desirability bias rather than accurate self-assessment.'},
+   signalNote:'A uniformly high score in this dimension (80+/100 with low variance) is a statistical red flag, not a positive result. No organisation with real AI adoption decisions underway is genuinely free of political dynamics. A high-confidence uniform response suggests social desirability bias rather than accurate self-assessment.',
+   sciNote:'In most organisations with active AI adoption, decision-making power and the deepest relevant knowledge sit with different people. Power quietly shapes which AI decisions get made — and which don\'t — before the technology even arrives.',
+   sciPrompts:['Who gains authority from your current AI decisions — and who loses it?','If you traced your last three AI choices back to who actually drove them, what pattern would you find?']},
 
   {id:'ethics',lb:'Ethics',label:'Ethics',icon:'⚡',iconBg:'#fff7ed',color:'#f97316',tag:'Dark side',tagBg:'#fff7ed',tagColor:'#7c2d12',category:'dark',
    sub:'When profit and what\'s right conflict around AI, how do you decide?',
@@ -421,7 +389,9 @@ var DIMS=[
    maturity:[{label:'Implicit',color:'#fecaca',text:'#991b1b',desc:'Ethics handled case-by-case; no systematic framework'},{label:'Stated',color:'#fed7aa',text:'#7c2d12',desc:'Ethics policy exists but not operationalised in AI decisions'},{label:'Active',color:'#fef08a',text:'#713f12',desc:'Ethical tensions actively surfaced and discussed in AI governance'},{label:'Embedded',color:'#bbf7d0',text:'#14532d',desc:'Ethics auditable alongside efficiency — trade-offs explicitly named'}],
    talking:'If your AI-related decisions were made fully transparent to employees, customers and supply chain — which ones would you be most uncomfortable explaining?',
    talkingColor:'#f97316',talkingBg:'#fff7ed',
-   signalNote:'Ethical maturity is not a high score — it is the willingness to sit with ethical tension rather than resolving it prematurely through narrative. An organisation claiming maximum ethics scores while rapidly deploying AI without explainability protocols should treat that as an inconsistency, not a validation.'},
+   signalNote:'Ethical maturity is not a high score — it is the willingness to sit with ethical tension rather than resolving it prematurely through narrative. An organisation claiming maximum ethics scores while rapidly deploying AI without explainability protocols should treat that as an inconsistency, not a validation.',
+   sciNote:'The gap between what organisations say about AI ethics and what their decisions actually show is one of the most consistent findings in organisational research. Transparency — making decisions fully visible — remains the most reliable test of genuine alignment.',
+   sciPrompts:['Which of your AI decisions would you be least comfortable explaining to employees, customers or the public?','Where does commercial pressure most often override what feels right in how AI is used here?']},
 
   {id:'social',lb:'Social',label:'Social',icon:'🤝',iconBg:'#f0fdf4',color:'#16a34a',tag:'Relational capital',tagBg:'#f0fdf4',tagColor:'#14532d',category:'capital',
    sub:'Do people actually trust each other through the disruption AI is causing?',
@@ -439,7 +409,9 @@ var DIMS=[
    maturity:[{label:'Fragile',color:'#fecaca',text:'#991b1b',desc:'Trust disrupted by AI transitions; no repair mechanisms'},{label:'Reactive',color:'#fed7aa',text:'#7c2d12',desc:'Trust issues addressed when they surface, not anticipated'},{label:'Managed',color:'#fef08a',text:'#713f12',desc:'Trust explicitly rebuilt during AI-driven role or workflow changes'},{label:'Resilient',color:'#bbf7d0',text:'#14532d',desc:'Trust architecture survives AI transitions; psychological safety embedded'}],
    talking:'When AI last changed a significant workflow in your organisation, what happened to team trust during the transition — and who was explicitly responsible for rebuilding it?',
    talkingColor:'#16a34a',talkingBg:'#f0fdf4',
-   signalNote:'Low psychological safety scores in this dimension create a validity problem for the entire audit — respondents who do not feel safe may not answer other dimensions honestly either. If wellbeing (dimension 8) is also low, the overall audit profile should be treated with additional caution.'},
+   signalNote:'Low psychological safety scores in this dimension create a validity problem for the entire audit — respondents who do not feel safe may not answer other dimensions honestly either. If wellbeing (dimension 8) is also low, the overall audit profile should be treated with additional caution.',
+   sciNote:'Trust between colleagues breaks down faster during AI transitions than most leaders anticipate — and does not rebuild without deliberate action. Psychological safety is the most fragile element and the hardest to see from the top.',
+   sciPrompts:['Who in your team feels less trusted, less valued or more watched since AI was introduced?','When AI last changed how your team works, who was responsible for rebuilding the trust and relationships that shifted?']},
 
   {id:'culture',lb:'Digital culture',label:'Digital culture',icon:'🧭',iconBg:'#ede9fe',color:'#7c3aed',tag:'Organisational capital',tagBg:'#ede9fe',tagColor:'#2e1065',category:'capital',
    sub:'Is your culture genuinely enabling AI, or just tolerating it?',
@@ -457,12 +429,14 @@ var DIMS=[
    maturity:[{label:'Resistant',color:'#fecaca',text:'#991b1b',desc:'AI bolted onto existing ways of working; culture unchanged'},{label:'Compliant',color:'#fed7aa',text:'#7c2d12',desc:'AI adopted as policy; culture not yet aligned'},{label:'Enabling',color:'#fef08a',text:'#713f12',desc:'Culture actively supports AI use; shared understanding developing'},{label:'Generative',color:'#bbf7d0',text:'#14532d',desc:'Culture and AI co-evolve; leadership models and learns alongside teams'}],
    talking:'Does your organisation have a shared answer to the question: what are humans for, now that AI can do X? If not — what does that absence tell you about your culture?',
    talkingColor:'#7c3aed',talkingBg:'#ede9fe',
-   signalNote:'This dimension shows the largest senior/operational divergence in most organisations. If senior leadership scores culture highly and operational teams score it significantly lower, treat the operational score as the more accurate signal — those are the people living the culture daily.'},
+   signalNote:'This dimension shows the largest senior/operational divergence in most organisations. If senior leadership scores culture highly and operational teams score it significantly lower, treat the operational score as the more accurate signal — those are the people living the culture daily.',
+   sciNote:'The single strongest predictor of effective AI adoption is not the quality of the technology — it is whether leadership visibly behaves in the way it expects others to. Culture follows what leaders model, not what they say.',
+   sciPrompts:['How would a new team member describe the AI culture here based on what they observe, rather than what they are told?','Can you name three specific ways your senior leaders demonstrate in practice the AI behaviours they expect from the organisation?']},
 
   {id:'data',lb:'Data bias',label:'Data bias',icon:'🔬',iconBg:'#fffbeb',color:'#d97706',tag:'Structural risk',tagBg:'#fffbeb',tagColor:'#78350f',category:'capital',
    sub:'Do you know what assumptions are baked into your AI systems?',
    qs:['We know who decided what data to capture and why in our AI systems.','Our AI training data reflects the full range of people in our organisation.','We actively question whether AI outputs reflect hidden assumptions in the data.'],
-   tip:'NIST (2022): AI bias comes from societal context as much as biased data.',
+   tip:'AI bias comes from the context in which systems are designed and deployed, not just from the data itself.',
    talk:'Who decided what your AI was trained on — and whose experience is structurally missing?',
    why:'The PhD research identified data capture context, design and processing as critical to the validity of any intangible measurement — noting that data is rarely captured with full context, particularly the dark side dimensions of political motivation, relational dynamics and unstated agendas. This concern is structurally amplified in AI systems. Every AI system encodes the priorities, assumptions and blind spots of those who designed the data capture process. These biases compound through processing and embed into outputs. Organisations that do not interrogate the provenance of their AI data are making decisions on a foundation they cannot see.',
    foundational:[
@@ -475,7 +449,9 @@ var DIMS=[
    maturity:[{label:'Unexamined',color:'#fecaca',text:'#991b1b',desc:'Data provenance and bias not considered in AI deployment'},{label:'Acknowledged',color:'#fed7aa',text:'#7c2d12',desc:'Bias recognised as possible; no systematic interrogation process'},{label:'Interrogated',color:'#fef08a',text:'#713f12',desc:'Regular review of data sources, capture context and processing assumptions'},{label:'Governed',color:'#bbf7d0',text:'#14532d',desc:'Bias governance embedded in AI procurement, design and review cycles'}],
    talking:'Who decided what data your AI systems were trained on — and what was their agenda? Whose experience, whose workflows, and whose voice is structurally missing from that data?',
    talkingColor:'#d97706',talkingBg:'#fffbeb',
-   signalNote:'This dimension links directly to the dark side dimensions. Data capture bias is not merely a technical problem — it is a political and ethical one. An organisation that scores well on ethics but poorly on data bias has an unresolved inconsistency that should be surfaced in facilitated conversation.'},
+   signalNote:'This dimension links directly to the dark side dimensions. Data capture bias is not merely a technical problem — it is a political and ethical one. An organisation that scores well on ethics but poorly on data bias has an unresolved inconsistency that should be surfaced in facilitated conversation.',
+   sciNote:'AI systems inherit the assumptions and blind spots of the people who designed them and chose what counted as data. The relevant question is not only whether the data is accurate — it is who decided what to measure and why.',
+   sciPrompts:['Who in your organisation has both the authority and the access to challenge what your AI systems were trained on?','What types of work, people or decisions are least represented in the data your AI was built on?']},
 
   {id:'memory',lb:'Org. memory',label:'Organisational memory',icon:'🧠',iconBg:'#eff6ff',color:'#2563eb',tag:'Human capital',tagBg:'#eff6ff',tagColor:'#1e3a8a',category:'human',
    sub:'Is what makes you you surviving the AI transition?',
@@ -493,12 +469,14 @@ var DIMS=[
    maturity:[{label:'Eroding',color:'#fecaca',text:'#991b1b',desc:'AI transitions accelerating knowledge loss; no preservation mechanisms'},{label:'Passive',color:'#fed7aa',text:'#7c2d12',desc:'Memory acknowledged as valuable; no active preservation strategy'},{label:'Protected',color:'#fef08a',text:'#713f12',desc:'Explicit mechanisms for capturing tacit knowledge during AI transitions'},{label:'Evolving',color:'#bbf7d0',text:'#14532d',desc:'Organisational memory actively curated and updated as AI reshapes work'}],
    talking:'When a long-serving employee left recently, what did the organisation lose that isn\'t in any system — and what is AI-driven change doing to accelerate that kind of invisible loss?',
    talkingColor:'#2563eb',talkingBg:'#eff6ff',
-   signalNote:'This dimension is likely to show the largest discrepancy between actual and perceived organisational health. Organisations in the middle of rapid AI deployment frequently score this dimension positively because the loss is not yet visible. A return visit 12 months later often shows a significant score decrease — which is precisely why longitudinal tracking matters.'},
+   signalNote:'This dimension is likely to show the largest discrepancy between actual and perceived organisational health. Organisations in the middle of rapid AI deployment frequently score this dimension positively because the loss is not yet visible. A return visit 12 months later often shows a significant score decrease — which is precisely why longitudinal tracking matters.',
+   sciNote:'When AI automates a workflow, it captures what people do but rarely why they do it — stripping out the context and judgement that make knowledge genuinely valuable. That loss is typically invisible until the capability is needed again.',
+   sciPrompts:['What knowledge would leave your organisation if your three most experienced people left tomorrow — and how much of that lives anywhere in a system?','Where has AI recently changed how work gets done, and what expertise is no longer being exercised as a result?']},
 
   {id:'agency',lb:'Human agency',label:'Human agency',icon:'✋',iconBg:'#f0fdf4',color:'#15803d',tag:'Human capital',tagBg:'#f0fdf4',tagColor:'#14532d',category:'human',
    sub:'Is work becoming more meaningful or less, as AI takes on more?',
    qs:['Work is becoming more meaningful as AI takes on routine tasks.','Employees have genuine input into how AI tools are introduced.','There is a clear sense of what humans are for as AI capability grows.'],
-   tip:'Ulrich (1998): the most valuable employees are volunteers — meaning drives them.',
+   tip:'The most engaged people treat their contribution as a choice — purpose and the sense that their judgement matters is what drives them.',
    talk:'Name three decisions last month where human judgement was irreducible. If you struggle, what does that signal?',
    why:'Ulrich (1998) established that intellectual capital is the product of competence multiplied by commitment — and critically, that employees with the highest intellectual capital have essentially become volunteers whose engagement is driven by meaning, not economic return. The PhD research extended this by identifying meaningful and empowering work as a key driver of human capital development in project-based organisations. In an AI context, agency is not simply about task assignment. It is about whether the human\'s contribution is genuinely valued — whether they are the author of consequential decisions or merely the reviewer of AI outputs.',
    foundational:[
@@ -511,12 +489,14 @@ var DIMS=[
    maturity:[{label:'Displaced',color:'#fecaca',text:'#991b1b',desc:'AI reducing scope of human judgement without replacement'},{label:'Managed',color:'#fed7aa',text:'#7c2d12',desc:'Human roles defined reactively around AI capability'},{label:'Designed',color:'#fef08a',text:'#713f12',desc:'Human agency explicitly designed into AI-adjacent workflows'},{label:'Amplified',color:'#bbf7d0',text:'#14532d',desc:'AI expands scope of human judgement; people empowered to decide more, not less'}],
    talking:'Can you name three decisions made in the last month where human judgement — not AI — was the irreducible, non-delegable factor? If you struggle to name them, what does that signal?',
    talkingColor:'#15803d',talkingBg:'#f0fdf4',
-   signalNote:'This dimension and wellbeing (dimension 8) are the most directly connected. When human agency scores low and wellbeing scores low simultaneously, the combination is a high-priority signal for intervention. Loss of agency is one of the empirically strongest predictors of work-related mental health deterioration in AI-impacted environments.'},
+   signalNote:'This dimension and wellbeing (dimension 8) are the most directly connected. When human agency scores low and wellbeing scores low simultaneously, the combination is a high-priority signal for intervention. Loss of agency is one of the empirically strongest predictors of work-related mental health deterioration in AI-impacted environments.',
+   sciNote:'People do their best work when their judgement genuinely matters. Evidence shows that when AI progressively narrows the scope of meaningful human decision-making, both engagement and organisational capability decline — often before the organisation notices.',
+   sciPrompts:['In the last month, where were humans the final, non-delegable decision-maker — not simply a reviewer of what AI produced?','Are the people most affected by AI in your organisation genuinely involved in decisions about how it is deployed?']},
 
   {id:'wellbeing',lb:'Wellbeing',label:'Wellbeing',icon:'💚',iconBg:'#fdf2f8',color:'#be185d',tag:'Social sustainability',tagBg:'#fdf2f8',tagColor:'#831843',category:'human',
    sub:'Is AI adoption making your people — and society — healthier or more fragile?',
    qs:['We monitor whether AI adoption is increasing or decreasing cognitive load.','Our AI use supports mental health rather than creating anxiety or surveillance.','We consider the broader societal implications of our AI decisions.'],
-   tip:'Frontiers in Public Health (2026): unmanaged AI adoption links to technostress and anxiety.',
+   tip:'Unmanaged AI adoption is consistently linked to increased workplace stress, anxiety and cognitive overload.',
    talk:'How do you know whether AI is increasing cognitive load? If you don\'t, you\'re managing blind.',
    why:'The PhD research identified project actor wellbeing as a systematically neglected dimension of the dark side of project management — treating deteriorating wellbeing not as a soft concern but as a capital dimension: it destroys human capital and erodes the social capital on which organisational performance depends. In the AI age, wellbeing has expanded in scope and urgency. Cognitive load, technostress, surveillance anxiety, algorithmic job insecurity, and the erosion of meaningful work interact to create new wellbeing risks that most organisations are not systematically monitoring.',
    foundational:[
@@ -529,17 +509,19 @@ var DIMS=[
    maturity:[{label:'Unmonitored',color:'#fecaca',text:'#991b1b',desc:'No systematic tracking of AI impact on cognitive load or mental health'},{label:'Reactive',color:'#fed7aa',text:'#7c2d12',desc:'Wellbeing addressed when problems surface; no proactive monitoring'},{label:'Monitored',color:'#fef08a',text:'#713f12',desc:'Regular assessment of AI\'s impact on cognitive load and stress included in reviews'},{label:'Designed',color:'#bbf7d0',text:'#14532d',desc:'Wellbeing impact explicitly considered in AI adoption decisions; brain health tracked as capital'}],
    talking:'How do you currently know whether your AI adoption is increasing or decreasing cognitive load on your people? If you don\'t have a systematic answer to that question, you are managing this risk blind.',
    talkingColor:'#be185d',talkingBg:'#fdf2f8',
-   signalNote:'Wellbeing and agency (dimension 7) form a compounding risk pair. When both score low simultaneously, this is a high-priority signal — the empirical literature shows this combination predicts elevated burnout and mental health deterioration risk. A facilitated conversation is more urgent than further measurement.'}
+   signalNote:'Wellbeing and agency (dimension 7) form a compounding risk pair. When both score low simultaneously, this is a high-priority signal — the empirical literature shows this combination predicts elevated burnout and mental health deterioration risk. A facilitated conversation is more urgent than further measurement.',
+   sciNote:'Poorly managed AI adoption is consistently linked to increased stress, cognitive overload and disengagement — particularly where people feel monitored or sense their role is at risk. Most organisations are not actively tracking whether this is happening.',
+   sciPrompts:['How would you know if AI is increasing the cognitive load or anxiety of your team — and what would you do with that information?','Are there people in your organisation who feel watched, threatened or sidelined by AI rather than genuinely supported by it?']}
 ];
 
 var EMOTIONS=['Recognised','Surprised','Uncomfortable','Validated','Concerned','Motivated','Frustrated','Uncertain','Relieved','Energised','Overwhelmed','Hopeful'];
-var ROLE_LABELS={senior:'Senior Leader',actor:'Project Actor',team:'Functional Team'};
+var ROLE_LABELS={senior:'Senior Leader',actor:'Project Actor',team:'Functional'};
 var ROLE_COLORS={senior:'#534AB7',actor:'#1D9E75',team:'#D85A30'};
 
 /* ─── STATE ─── */
 var audRole='senior',audCurDim=0,audAnswers={},audEmotions=[],audDidCommitment='';
 var currentSession=null,radarChart=null,trendChart=null,divChart=null;
-var sciFilterCat='all',sciOpenId=null,activeSection='audit';
+var sciFilterCat='all',sciOpenId=null,activeSection='audit',sciUnlocked=false;
 
 /* ─── STORAGE ─── */
 function slug(s){return(s||'default').toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'');}
@@ -588,22 +570,6 @@ function checkDivBadge(){
 
 /* ─── AUDIT HOME ─── */
 function checkHistory(){
-  var h=getHistory();
-  var sec=document.getElementById('aud-hist-sec');
-  var list=document.getElementById('aud-hist-list');
-  if(!sec||!list)return;
-  if(h.length>0){
-    sec.style.display='block';
-    list.innerHTML=h.slice(-3).reverse().map(function(e,i){
-      var bc=ROLE_COLORS[e.role]||'#534AB7';
-      var rl=ROLE_LABELS[e.role]||e.role;
-      return '<div class="hc'+(i===0?' latest':'')+'">'
-        +'<div class="hc-role" style="color:'+bc+'">'+rl+'</div>'
-        +'<div class="hc-date">'+e.date+'</div>'
-        +'<div class="chips">'+DIMS.map(function(d){return '<span class="chip" style="background:'+d.color+'18;color:'+d.color+'">'+d.lb+': '+(e.scores[d.id]||0)+'</span>';}).join('')+'</div>'
-        +'</div>';
-    }).join('');
-  }else{sec.style.display='none';}
   checkDivBadge();
 }
 
@@ -620,6 +586,7 @@ function startAudit(){
   var name=document.getElementById('aud-name').value.trim();
   if(!name){alert('Please enter your name to begin.');return;}
   audAnswers={};audCurDim=0;audEmotions=[];audDidCommitment='';
+  ['r1','r2','r3','r4','r5'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
   var roleLabel=ROLE_LABELS[audRole]||audRole;
   document.getElementById('aud-banner').textContent=org+' — '+roleLabel;
   audShow('aud-quest');
@@ -656,8 +623,7 @@ function renderDim(){
     +'<span style="font-size:11px;font-weight:600;padding:2px 9px;border-radius:6px;background:'+d.color+'18;color:'+d.color+'">'+d.tag+'</span>'
     +'<span style="font-size:11px;color:#94a3b8">'+( audCurDim+1)+' of '+DIMS.length+'</span></div>'
     +'<div style="font-size:17px;font-weight:700;color:#1e293b;margin-bottom:12px">'+d.lb+'</div>'
-    +qsHtml
-    +'<div class="sci-tip"><p><strong style="color:#1e293b">Why honest scoring is hard:</strong> '+d.tip+'</p></div>';
+    +qsHtml;
 
   document.getElementById('btn-prev').style.opacity=audCurDim===0?'0.4':'1';
   document.getElementById('btn-next').textContent=audCurDim===DIMS.length-1?'See results →':'Next →';
@@ -685,17 +651,10 @@ function showResults(){
   document.getElementById('res-sub').textContent=roleLabel+' perspective — '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
 
   var scores=DIMS.map(function(d){return sc(d.id);});
-  var h=getHistory();
-  var prev=h.length>0?h[h.length-1]:null;
-  var prevScores=prev?DIMS.map(function(d){return prev.scores[d.id]||0;}):null;
 
   if(radarChart)radarChart.destroy();
   var ctx=document.getElementById('radar').getContext('2d');
   var ds=[{label:'This audit',data:scores,backgroundColor:'rgba(83,74,183,0.12)',borderColor:'#534AB7',borderWidth:2.5,pointBackgroundColor:DIMS.map(function(d){return d.color;}),pointBorderColor:'#fff',pointRadius:5,borderDash:[]}];
-  if(prevScores){
-    ds.push({label:'Previous',data:prevScores,backgroundColor:'rgba(148,163,184,0.06)',borderColor:'#94a3b8',borderWidth:1.5,pointBackgroundColor:'#94a3b8',pointBorderColor:'#fff',pointRadius:3,borderDash:[4,3]});
-    document.getElementById('radar-legend').style.display='block';
-  }
   radarChart=new Chart(ctx,{type:'radar',data:{labels:DIMS.map(function(d){return d.lb;}),datasets:ds},options:{responsive:false,scales:{r:{min:0,max:100,ticks:{stepSize:25,font:{size:9},color:'#94a3b8'},pointLabels:{font:{size:10,weight:'500'}},grid:{color:'rgba(0,0,0,0.05)'},angleLines:{color:'rgba(0,0,0,0.05)'}}},plugins:{legend:{display:false}}}});
 
   document.getElementById('sig-grid').innerHTML=DIMS.map(function(d,i){
@@ -704,42 +663,29 @@ function showResults(){
     var dc=sig==='green'?'#16a34a':sig==='amber'?'#d97706':'#dc2626';
     var sbg=sig==='green'?'#f0fdf4':sig==='amber'?'#fffbeb':'#fef2f2';
     var sl=sig==='green'?'Consistent':sig==='amber'?'Explore further':'Review signal';
-    var delta=prevScores?scores[i]-prevScores[i]:null;
-    var deltaStr=delta!==null?(delta>0?'<span class="dp">▲'+delta+'</span>':delta<0?'<span class="dn2">▼'+Math.abs(delta)+'</span>':'<span class="dz">—</span>'):'';
+    var sciHtml=sciUnlocked&&d.sciNote
+      ?'<div style="margin-top:8px;padding:8px 10px;background:#f8f7ff;border-radius:7px;border-left:2px solid #c4b5fd">'
+        +'<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7c3aed;margin-bottom:4px">Science insight</div>'
+        +'<p style="font-size:11px;color:#475569;line-height:1.55;margin-bottom:6px">'+d.sciNote+'</p>'
+        +d.sciPrompts.map(function(q){return '<p style="font-size:10.5px;color:#64748b;line-height:1.5;font-style:italic;margin-top:3px">→ '+q+'</p>';}).join('')
+        +'</div>'
+      :'';
     return '<div class="sig-card">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'
       +'<span style="font-size:11px;font-weight:600;color:#1e293b">'+d.lb+'</span>'
       +'<span style="width:8px;height:8px;border-radius:50%;background:'+dc+';display:inline-block"></span></div>'
-      +'<div style="font-size:20px;font-weight:700;color:'+d.color+';margin-bottom:2px">'+s+'<span style="font-size:11px;color:#94a3b8">/100</span> '+deltaStr+'</div>'
+      +'<div style="font-size:20px;font-weight:700;color:'+d.color+';margin-bottom:2px">'+s+'<span style="font-size:11px;color:#94a3b8">/100</span></div>'
       +'<span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;background:'+sbg+';color:'+dc+'">'+sl+'</span>'
       +'<div style="font-size:10px;color:#64748b;margin-top:6px;line-height:1.5;font-style:italic">"'+d.talk+'"</div>'
+      +'<div style="font-size:10px;color:#94a3b8;margin-top:5px;line-height:1.5;padding-top:5px;border-top:1px solid #f1f5f9">'+d.tip+'</div>'
+      +sciHtml
       +'</div>';
   }).join('');
 
-  var movEl=document.getElementById('mov-list');
-  if(prevScores&&prev){
-    document.getElementById('mov-intro').textContent='Compared to your visit on '+prev.date+'. Green = improved, red = declined.';
-    movEl.innerHTML=DIMS.map(function(d,i){
-      var delta=scores[i]-prevScores[i];
-      var dc=delta>0?'#15803d':delta<0?'#dc2626':'#94a3b8';
-      var arrow=delta>0?'▲':delta<0?'▼':'—';
-      return '<div class="mov-row">'
-        +'<span style="font-size:12px;font-weight:500;color:#1e293b;width:100px;flex-shrink:0">'+d.lb+'</span>'
-        +'<div style="flex:1;height:8px;background:#f1f5f9;border-radius:4px;overflow:hidden;position:relative">'
-        +'<div style="position:absolute;left:0;top:0;height:100%;width:'+prevScores[i]+'%;background:#e2e8f0;border-radius:4px"></div>'
-        +'<div style="position:absolute;left:0;top:0;height:100%;width:'+scores[i]+'%;background:'+d.color+';border-radius:4px;opacity:0.8"></div>'
-        +'</div>'
-        +'<span style="font-size:12px;font-weight:600;color:'+dc+';width:50px;text-align:right">'+arrow+Math.abs(delta)+'</span>'
-        +'</div>';
-    }).join('');
-  }else{
-    document.getElementById('mov-intro').textContent='Complete another audit in a future visit to see movement over time.';
-    movEl.innerHTML='<p style="font-size:12px;color:#94a3b8;padding:12px 0">No previous visit data for this organisation and role.</p>';
-  }
 }
 
 function resTab(t){
-  ['spider','signals','movement'].forEach(function(x,i){
+  ['spider','signals'].forEach(function(x,i){
     document.getElementById('rtc-'+x).style.display=x===t?'block':'none';
     var b=document.getElementById('rt'+(i+1));
     if(b)b.className='tab'+(x===t?' on':'');
@@ -752,18 +698,6 @@ function goReflect(){
   document.getElementById('emo-grid').innerHTML=EMOTIONS.map(function(e){
     return '<button class="emo'+(audEmotions.indexOf(e)>=0?' on':'')+'" onclick="toggleEmo(\''+e+'\')">'+e+'</button>';
   }).join('');
-  var h=getHistory();
-  var prev=h.length>0?h[h.length-1]:null;
-  if(prev){
-    if(prev.r1||prev.r2){
-      document.getElementById('prev-refl-block').style.display='block';
-      document.getElementById('prev-refl-text').textContent=prev.date+': "'+(prev.r1||prev.r2||'No reflection recorded')+'"';
-    }
-    if(prev.r5||prev.r4){
-      document.getElementById('prev-commit-block').style.display='block';
-      document.getElementById('prev-commit-text').textContent=prev.r5||prev.r4;
-    }
-  }
 }
 
 function toggleEmo(e){
@@ -772,14 +706,6 @@ function toggleEmo(e){
   document.getElementById('emo-grid').innerHTML=EMOTIONS.map(function(x){
     return '<button class="emo'+(audEmotions.indexOf(x)>=0?' on':'')+'" onclick="toggleEmo(\''+x+'\')">'+x+'</button>';
   }).join('');
-}
-
-function setDid(v){
-  audDidCommitment=v;
-  ['yes','partial','no'].forEach(function(x){
-    var b=document.getElementById('did-'+x);
-    if(b)b.className='emo'+(x===v?' on':'');
-  });
 }
 
 function saveAndComplete(){
@@ -850,8 +776,13 @@ function downloadReport(e){
     var mv=delta!==null?(delta>0?' ▲'+delta+' vs previous':delta<0?' ▼'+Math.abs(delta)+' vs previous':' — unchanged'):'';
     lines.push('  '+(d.lb+'          ').slice(0,16)+' '+(s+'/100    ').slice(0,10)+mv);
   });
-  lines.push('','───────────────────────────────────────────────────────','  TALKING POINTS','───────────────────────────────────────────────────────','');
-  DIMS.forEach(function(d){lines.push('  '+d.lb+': '+d.talk,'');});
+  lines.push('','───────────────────────────────────────────────────────','  SIGNALS & TALKING POINTS','───────────────────────────────────────────────────────','');
+  DIMS.forEach(function(d){
+    lines.push('  '+d.lb);
+    lines.push('  Note: '+d.tip);
+    lines.push('  Question: '+d.talk);
+    lines.push('');
+  });
   lines.push('───────────────────────────────────────────────────────','  REFLECTION','───────────────────────────────────────────────────────','');
   if(e.r1)lines.push('  What surprised you:','  '+e.r1,'');
   if(e.r2)lines.push('  What you recognised but didn\'t want to see:','  '+e.r2,'');
@@ -941,6 +872,13 @@ function renderDivergence(){
       return '<span style="font-size:11px;padding:2px 8px;border-radius:5px;background:'+rc+'18;color:'+rc+';font-weight:500">'+rl+': '+s+'</span>';
     }).join(' ');
 
+    var divSciHtml=sciUnlocked&&g.d.sciNote
+      ?'<div style="margin-top:8px;padding:8px 10px;background:#f8f7ff;border-radius:7px;border-left:2px solid #c4b5fd">'
+        +'<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7c3aed;margin-bottom:4px">Science insight</div>'
+        +'<p style="font-size:11px;color:#475569;line-height:1.55;margin-bottom:6px">'+g.d.sciNote+'</p>'
+        +g.d.sciPrompts.map(function(q){return '<p style="font-size:10.5px;color:#64748b;line-height:1.5;font-style:italic;margin-top:3px">→ '+q+'</p>';}).join('')
+        +'</div>'
+      :'<p style="font-size:10px;color:#94a3b8;margin-top:5px">→ See the <a href="#" onclick="navTo(\'science\');return false;" style="color:#D4A843;text-decoration:none;font-weight:600">Science layer</a> for the evidence behind this dimension.</p>';
     gapHtml+='<div class="div-dim">'
       +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">'
       +'<span style="font-size:13px;font-weight:600;color:#1e293b">'+g.d.lb+'</span>'
@@ -950,7 +888,8 @@ function renderDivergence(){
       +'<div class="gap-bar"><div class="gap-fill" style="left:'+g.minV+'%;width:'+g.gap+'%;background:'+g.levelColor+'40"></div></div>'
       +'<p style="font-size:12px;color:#475569;line-height:1.6;margin-bottom:6px">'+narrative+'</p>'
       +'<p style="font-size:11px;color:#64748b;font-style:italic;line-height:1.5">Starting question: "'+g.d.talk+'"</p>'
-      +'<p style="font-size:10px;color:#94a3b8;margin-top:5px">→ See the <a href="#" onclick="navTo(\'science\');return false;" style="color:#D4A843;text-decoration:none;font-weight:600">Science layer</a> for the evidence behind this dimension.</p>'
+      +'<p style="font-size:10px;color:#94a3b8;margin-top:5px;padding-top:5px;border-top:1px solid #f1f5f9">'+g.d.tip+'</p>'
+      +divSciHtml
       +'</div>';
   });
   gapHtml+='</div>';
@@ -1189,6 +1128,7 @@ function accessScience(){
   var code=prompt('Enter Science Layer access code:');
   if(code===null)return;
   if(code==='IT2024SCIENCE'){
+    sciUnlocked=true;
     document.getElementById('ref-grp').style.display='block';
     document.getElementById('nav-science').style.display='flex';
     document.getElementById('sci-access-link').style.display='none';

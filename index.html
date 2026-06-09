@@ -151,6 +151,7 @@ textarea{resize:vertical;line-height:1.6}
   <div class="sb-brand">
     <h1>Intangible Twin™ Lite</h1>
     <p>Surfacing the intangible dimensions of your organisation's AI transformation journey</p>
+    <p style="font-size:9px;color:#D4A843;margin-top:5px;line-height:1.6;opacity:.85;text-transform:none;letter-spacing:.01em">Human-centred insights driving your organisation's sustainable competitive advantage in the age of AI</p>
   </div>
   <div class="sb-grp">Workspace</div>
   <div class="sb-item on" id="nav-audit" style="--sc:#534AB7" onclick="navTo('audit')"><span class="sb-icon">◎</span>Audit</div>
@@ -186,6 +187,8 @@ textarea{resize:vertical;line-height:1.6}
       <h2>Audit</h2>
       <p class="sub">Intangible Twin™ Lite measures dimensions of organisational and human capabilities to surface insight on AI adoption and tradeoffs.</p>
       <div class="card">
+        <label class="fl">Organisation</label>
+        <input type="text" id="aud-org-input" placeholder="e.g. Acme Ltd" autocomplete="off" style="margin-bottom:14px" oninput="document.getElementById('hdr-org').value=this.value;onOrgChange()">
         <label class="fl">Your name</label>
         <p class="fs">Used for audit transparency only — not displayed in the report.</p>
         <input type="text" id="aud-name" placeholder="e.g. Alex Smith" autocomplete="off">
@@ -207,6 +210,7 @@ textarea{resize:vertical;line-height:1.6}
   <!-- Questions -->
   <div id="aud-quest" style="display:none">
     <div class="aud-banner" id="aud-banner" style="background:#534AB7;color:#e0e7ff"></div>
+    <div id="aud-org-disp" style="display:none;font-size:11px;font-weight:600;color:#1B2A4A;background:#e0e7ff;padding:4px 16px;text-align:center;letter-spacing:.02em"></div>
     <div class="pb"><div class="pf" id="aud-prog" style="width:0%;background:#534AB7"></div></div>
     <div class="ddots" id="aud-dots"></div>
     <div class="aud-body" id="aud-body"></div>
@@ -560,7 +564,7 @@ function audShow(id){
   });
 }
 
-function onOrgChange(){checkHistory();checkDivBadge();}
+function onOrgChange(){var ai=document.getElementById('aud-org-input');if(ai)ai.value=document.getElementById('hdr-org').value;checkHistory();checkDivBadge();}
 
 function checkDivBadge(){
   var h=getHistory();
@@ -590,6 +594,7 @@ function startAudit(){
   ['r1','r2','r3','r4','r5'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
   var roleLabel=ROLE_LABELS[audRole]||audRole;
   document.getElementById('aud-banner').textContent=org+' — '+roleLabel;
+  var od=document.getElementById('aud-org-disp');if(od){od.textContent=org;od.style.display='block';}
   audShow('aud-quest');
   renderDim();
 }
